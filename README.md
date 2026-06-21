@@ -81,3 +81,41 @@ The objective of this assignment was to construct and evaluate an image classifi
 ## Key Findings & Performance Metrics
 * **ANN Limitations:** Flattening raw images into 1D vectors destroys localized spatial features, causing the ANN to hit a lower accuracy ceiling.
 * **CNN Strengths:** By actively tracking structural configurations (edges, patterns, shapes), the CNN effectively generalizes visual categories, significantly outperforming the ANN across the 5-epoch training trajectory.
+
+
+
+Week 5: Text Generation using RNN, LSTM, and GRU
+
+Project Overview
+
+The objective of this week's assignment was to design and implement a Natural Language Processing (NLP) deep learning system capable of learning the underlying structure, grammar, and contextual dependencies of a text corpus. The project focused on building and comparatively evaluating three distinct sequential architectures—Vanilla RNN, LSTM, and GRU—for coherent text generation.
+
+Key Implementation Steps & Customizations
+
+This project was built to strictly satisfy specific architectural learning constraints:
+
+Custom Text Corpus: Replaced boilerplate text with a custom paragraph focused on Artificial Intelligence and deep learning architectures to train the models on domain-specific vocabulary.
+
+Tokenization & Windowing: Initialized standard text tokenization and mapped words to integers. Reframed the word index tracking lists into progressive sliding-window combinations (n-grams) and matched vector dimensions using pad_sequences.
+
+Architectural Scaling: * Upscaled embedding dimensions to 64.
+
+Widened hidden recurrent layers from 64 to 128 units for all three models (RNN, LSTM, GRU).
+
+Extended Training: Expanded the training duration to 200 epochs using an identical adam optimizer configuration across all models to ensure a fair baseline comparison.
+
+Generation Logic: Programmed the internal selection logic inside the generate_text function utilizing np.argmax over next-word probability arrays for greedy search prediction, outputting exactly 10 words per prompt.
+
+Technical Stack
+
+Language: Python
+
+Frameworks: TensorFlow, Keras, Matplotlib
+
+Hardware Accelerator: Google Colab T4 GPU
+
+Key Findings & Evaluation
+
+Training Stabilization: Plotted the optimization trajectories (categorical cross-entropy loss) for all three models. All architectures successfully minimized loss close to zero over the 200 epochs, demonstrating rapid stabilization.
+
+Memorization & Greedy Search: Because the models were trained on a small, focused custom corpus for an extended period (200 epochs) and utilized a deterministic np.argmax selection method, they perfectly memorized the sequence text. When fed the shared seed phrase "Deep learning architectures", all three models successfully and accurately reproduced the exact grammatical sequence from the training text ("like recurrent neural networks allow systems to retain memory of").
