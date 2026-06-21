@@ -84,34 +84,23 @@ The objective of this assignment was to construct and evaluate an image classifi
 
 
 
-Week 5: Text Generation Model using RNN, LSTM, and GRU
+# Week 5: Text Generation Model using RNN, LSTM, and GRU
 
-Project Overview
-
+## Project Overview
 The objective of this assignment was to design and implement a Natural Language Processing (NLP) text generation system. The project focused on conducting an architectural sequence analysis, directly benchmarking a traditional SimpleRNN, a gated Long Short-Term Memory (LSTM) network, and an optimized Gated Recurrent Unit (GRU) across shared training strategies.
 
-Key Implementation Steps
+## Key Implementation Steps
+* **Custom Dataset Ingestion:** Replaced default boilerplate text with a specialized domain-specific paragraph corpus focused on artificial intelligence to establish an original vocabulary space.
+* **N-Gram Sequence Engineering:** Tokenized text into integer word indexes and reframed tracking lists into progressive sliding-window combinations (n-grams) using pre-padding to normalize input vector shapes.
+* **Recurrent Network Architectures:** Engineered SimpleRNN, LSTM, and GRU models using an upscaled `64`-dimension embedding space and widened hidden layers (scaling from 64 to `128` units) to bolster sequence memory.
+* **Optimization & Training Strategy:** Extended model execution to `200 epochs` under an identical `adam` optimizer configuration to deeply study loss stabilization speed across all three architectures.
+* **Deterministic Text Generation:** Programmed a generative loop using `np.argmax` over predicted probability arrays to execute greedy-search next-word prediction, outputting exactly `10` words per seed prompt.
 
-Custom Dataset Ingestion: Replaced default boilerplate text with a specialized domain-specific paragraph corpus focused on artificial intelligence to establish an original vocabulary space.
+## Technical Stack
+* **Language:** Python
+* **Frameworks:** TensorFlow, Keras, Matplotlib
+* **Hardware Accelerator:** Google Colab T4 GPU
 
-N-Gram Sequence Engineering: Tokenized text into integer word indexes and reframed tracking lists into progressive sliding-window combinations (n-grams) using pre-padding to normalize input vector shapes.
-
-Recurrent Network Architectures: Engineered SimpleRNN, LSTM, and GRU models using an upscaled 64-dimension embedding space and widened hidden layers (scaling from 64 to 128 units) to bolster sequence memory.
-
-Optimization & Training Strategy: Extended model execution to 200 epochs under an identical adam optimizer configuration to deeply study loss stabilization speed across all three architectures.
-
-Deterministic Text Generation: Programmed a generative loop using np.argmax over predicted probability arrays to execute greedy-search next-word prediction, outputting exactly 10 words per seed prompt.
-
-Technical Stack
-
-Language: Python
-
-Frameworks: TensorFlow, Keras, Matplotlib
-
-Hardware Accelerator: Google Colab T4 GPU
-
-Key Findings & Performance Metrics
-
-Training Convergence: All three recurrent architectures successfully minimized categorical cross-entropy loss down close to zero over the 200-epoch trajectory, demonstrating rapid optimization trajectories.
-
-Deterministic Output Alignment: Under deterministic greedy decoding (argmax search), the RNN, LSTM, and GRU models yielded identical, perfectly memorized, and grammatically sound outputs when initialized with a shared seed phrase.
+## Key Findings & Performance Metrics
+* **Training Convergence:** All three recurrent architectures successfully minimized categorical cross-entropy loss down close to zero over the 200-epoch trajectory, demonstrating rapid optimization trajectories.
+* **Deterministic Output Alignment:** Under deterministic greedy decoding (argmax search), the RNN, LSTM, and GRU models yielded identical, perfectly memorized, and grammatically sound outputs when initialized with a shared seed phrase.
