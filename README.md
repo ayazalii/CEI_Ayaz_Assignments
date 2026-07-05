@@ -119,3 +119,27 @@ The objective of this assignment was to design and implement a Natural Language 
 ### 3. Quantitative Evaluation (Innovation Task)
 * To assess the quality of our reconstructions quantitatively, we calculated the Peak Signal-to-Noise Ratio (PSNR) across the test set. 
 * The input noisy images showed an initial average PSNR of approximately **12.5 dB**. Post-processing through our trained convolutional model boosted the metric significantly to **~22.4 dB** (+10 dB average gain). This provides numerical confirmation that digit structures were restored correctly.
+
+
+
+# Week 7: Document Question Answering System (RAG)
+
+## Project Overview
+The objective of this assignment was to design and implement a Retrieval-Augmented Generation (RAG) system to answer questions based on custom, unstructured documents. The project focused on building an end-to-end question-answering pipeline that dynamically extracts context from local PDFs or text files, ranks semantic matches, and feeds them into a language model to produce factually grounded answers.
+
+## Key Implementation Steps
+* **Dynamic Document Ingestion:** Built a parser utilizing `pypdf` to extract raw text strings from local PDF uploads with a built-in architectural document fallback to ensure offline system resilience.
+* **Sliding-Window Text Chunking:** Segmented raw text strings into overlapping character chunks (size 300, overlap 50) to preserve local contextual boundaries and protect model context windows from token overflow.
+* **Semantic Vector Embedding:** Leveraged a local `all-MiniLM-L6-v2` SentenceTransformer model to convert raw text chunks into high-dimensional vector representations capturing deep semantic meaning.
+* **Cosine Similarity Retrieval:** Programmed raw mathematical cosine calculations to calculate semantic alignment between query vectors and document chunk vectors, establishing a highly accurate search index.
+* **Grounded Generation Pipeline:** Engineered an augmented prompt system incorporating custom system instructions and strict validation rules, querying the Gemini API via post protocols to generate concise, step-by-step responses based exclusively on retrieved contexts.
+
+## Technical Stack
+* **Language:** Python
+* **Libraries:** PyPDF, Sentence-Transformers, NumPy, Requests
+* **LLM Engine:** Gemini-3-Flash API
+* **Environment:** Google Colab T4 GPU
+
+## Key Findings & Performance Metrics
+* **Deterministic Vector Matching:** The mathematical similarity index successfully identified and ranked optimal context chunks for complex semantic queries (e.g., matching "optimal chunk size" to the corresponding document range with high cosine alignment).
+* **Zero-Hallucination Guardrails:** Restricting system prompt parameters successfully prevented the language model from generating answers outside the retrieved contexts, successfully shielding the system from false model assumptions.
