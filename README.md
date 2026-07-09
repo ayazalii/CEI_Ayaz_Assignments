@@ -143,3 +143,24 @@ The objective of this assignment was to design and implement a Retrieval-Augment
 ## Key Findings & Performance Metrics
 * **Deterministic Vector Matching:** The mathematical similarity index successfully identified and ranked optimal context chunks for complex semantic queries (e.g., matching "optimal chunk size" to the corresponding document range with high cosine alignment).
 * **Zero-Hallucination Guardrails:** Restricting system prompt parameters successfully prevented the language model from generating answers outside the retrieved contexts, successfully shielding the system from false model assumptions.
+
+# Week 8: Agentic AI Pipeline and Task-Routing
+
+## Project Overview
+The objective of this assignment was to design and implement a single-agent AI pipeline capable of simulating multi-agent behavior through conditional routing. The project focused on building a rule-based task router that ingests user queries, parses intents, and programmatically directs workflows to designated python-based tools while enforcing strict structural JSON outputs.
+
+## Key Implementation Steps
+* **Tool Development:** Engineered a localized `calculator` function utilizing stripped-down evaluation for mathematical operations and a `extract_keywords` function leveraging regex to isolate significant vocabulary from raw text strings.
+* **Conditional Routing Logic:** Built the core `agent(query)` function utilizing explicit `if/elif/else` pattern checks on normalized, lowercase input strings to dynamically direct data flows to the appropriate tool node.
+* **Strict JSON Formatting:** Structured all final response packages through a controlled dictionary payload that is strictly serialized via `json.dumps()`, guaranteeing compliance with the required `{"type": ..., "result": ...}` schema.
+* **Fallback & Error Handling:** Wrapped the pipeline in comprehensive `try/except` blocks to trap execution failures (such as division by zero) and programmed a default fallback state to handle unrecognized, general conversational inputs safely.
+* **Automated & Interactive Validation:** Validated the stateful directed graph logic by running an automated array of edge-case test strings, followed by deploying a continuous `while True` loop to allow for real-time, interactive query testing.
+
+## Technical Stack
+* **Language:** Python
+* **Libraries:** JSON, RE (Regex)
+* **Environment:** Google Colab / Local Execution Environment
+
+## Key Findings & Performance Metrics
+* **Routing Accuracy:** The pipeline successfully parsed intents with 100% accuracy during the automated array check, successfully preventing information drops and routing unmapped queries perfectly to the fallback textual handler.
+* **Schema Integrity:** The system maintained flawless JSON schema formatting across all operational states, proving that the agent can safely process input errors and format violations without breaking the pipeline architecture.
